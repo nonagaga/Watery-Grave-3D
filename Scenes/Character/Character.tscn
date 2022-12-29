@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.gd" type="Script" id=1]
 
@@ -7,6 +7,9 @@ mid_height = 3.0
 
 [sub_resource type="CapsuleShape" id=2]
 height = 3.0
+
+[sub_resource type="Environment" id=3]
+ambient_light_energy = 0.0
 
 [node name="Character" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -23,3 +26,9 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51439, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
+environment = SubResource( 3 )
+fov = 90.0
+
+[node name="SpotLight" type="SpotLight" parent="Head"]
+spot_range = 50.0
+spot_angle = 20.0

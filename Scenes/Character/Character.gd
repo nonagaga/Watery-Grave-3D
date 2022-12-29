@@ -25,12 +25,15 @@ func _input(event):
 func _physics_process(delta):
 	direction = Vector3()
 	
-	direction += transform.basis.z * (-Input.get_action_strength("move_forward")) + transform.basis.z * Input.get_action_strength("move_backward")
-	direction += transform.basis.x * (-Input.get_action_strength("move_left")) + transform.basis.x * Input.get_action_strength("move_right")
+	direction += head.global_transform.basis.z * ((-Input.get_action_strength("move_forward")) + Input.get_action_strength("move_backward"))
+	direction += head.global_transform.basis.x * (-Input.get_action_strength("move_left")) + head.global_transform.basis.x * Input.get_action_strength("move_right")
+	
+	direction.y += Input.get_action_strength("swim_up")
 	
 	direction = direction.normalized()
 	h_velocity = h_velocity.linear_interpolate(direction*speed, h_acceleration * delta)
 	movement.z = h_velocity.z
 	movement.x = h_velocity.x
+	movement.y = h_velocity.y
 	
 	move_and_slide(movement, Vector3.UP)
