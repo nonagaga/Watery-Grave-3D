@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Character/FlashLight.gd" type="Script" id=1]
+
+[node name="FlashLight" type="SpotLight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51439, 0 )
+light_color = Color( 1, 0.984314, 0.780392, 1 )
+spot_range = 80.0
+spot_attenuation = 2.21914
+spot_angle = 20.0
+script = ExtResource( 1 )

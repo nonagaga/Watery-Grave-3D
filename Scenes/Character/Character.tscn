@@ -27,8 +27,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51439, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
 environment = SubResource( 3 )
-fov = 90.0
-
-[node name="SpotLight" type="SpotLight" parent="Head"]
-spot_range = 50.0
-spot_angle = 20.0

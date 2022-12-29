@@ -1,10 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/MainScenes/GameUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Textures/Grid-Level2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Character/FlashLight.tscn" type="PackedScene" id=4]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 3 )
 
 [sub_resource type="PlaneMesh" id=1]
-size = Vector2( 20, 20 )
+material = SubResource( 3 )
+size = Vector2( 50, 50 )
+
+[sub_resource type="Skin" id=4]
 
 [sub_resource type="ConcavePolygonShape" id=2]
 data = PoolVector3Array( 10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10 )
@@ -15,11 +23,59 @@ data = PoolVector3Array( 10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, 
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
+skin = SubResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 shape = SubResource( 2 )
 
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+skin = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+skin = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+skin = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+skin = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+skin = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance6/StaticBody"]
+shape = SubResource( 2 )
+
 [node name="Character" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58423, 0 )
+
+[node name="FlashLight" parent="." instance=ExtResource( 4 )]

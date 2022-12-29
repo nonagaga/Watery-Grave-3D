@@ -3,7 +3,7 @@ extends KinematicBody
 
 export var mouse_sensitivity = 0.03
 
-export var speed = 10
+export var speed = 8
 
 onready var head = $Head
 
@@ -23,12 +23,13 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
 
 func _physics_process(delta):
+	
 	direction = Vector3()
 	
 	direction += head.global_transform.basis.z * ((-Input.get_action_strength("move_forward")) + Input.get_action_strength("move_backward"))
 	direction += head.global_transform.basis.x * (-Input.get_action_strength("move_left")) + head.global_transform.basis.x * Input.get_action_strength("move_right")
 	
-	direction.y += Input.get_action_strength("swim_up")
+	direction.y += (Input.get_action_strength("swim_up") - Input.get_action_strength("swim_down"))/1.5
 	
 	direction = direction.normalized()
 	h_velocity = h_velocity.linear_interpolate(direction*speed, h_acceleration * delta)
