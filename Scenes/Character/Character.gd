@@ -5,6 +5,8 @@ export var mouse_sensitivity = 0.03
 
 export var speed = 15
 
+export var swim_up_divider = 1.5 #this value was originally in like 34 but i changed it to an export variable for quick moving
+
 onready var head = $Head
 
 var h_acceleration = 2
@@ -29,7 +31,7 @@ func _physics_process(delta):
 	direction += head.global_transform.basis.z * ((-Input.get_action_strength("move_forward")) + Input.get_action_strength("move_backward"))
 	direction += head.global_transform.basis.x * (-Input.get_action_strength("move_left")) + head.global_transform.basis.x * Input.get_action_strength("move_right")
 	
-	direction.y += (Input.get_action_strength("swim_up") - Input.get_action_strength("swim_down"))/1.5
+	direction.y += (Input.get_action_strength("swim_up") - Input.get_action_strength("swim_down"))/swim_up_divider #I believed that all possible adjustable values should not be magic numbers
 	
 	direction = direction.normalized()
 	
