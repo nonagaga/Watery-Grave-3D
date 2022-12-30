@@ -9,7 +9,9 @@ mid_height = 3.0
 height = 3.0
 
 [sub_resource type="Environment" id=3]
+background_energy = 0.0
 ambient_light_energy = 0.0
+fog_color = Color( 0.0509804, 0.054902, 0.0901961, 0.466667 )
 
 [node name="Character" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -27,6 +29,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51439, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
 environment = SubResource( 3 )
+far = 200.0
 
 [node name="OmniLight" type="OmniLight" parent="."]
 light_color = Color( 1, 0.984314, 0.780392, 1 )

@@ -1,0 +1,22 @@
+newmtl Default
+Kd 0.784314 0.784314 0.784314
+Ke 0 0 0
+Ka 1 1 1
+Ks 0 0 0
+Ns 400
+Tr 0
+d 1
+Ni 1
+Tf 1 1 1
+
+newmtl water
+Kd 0 0.184314 0.74902
+Ke 1.5 1.5 1.5
+Ka 1 1 1
+Ks 0.97 0.97 0.97
+Ns 985
+Tr 0
+d 1
+Ni 1
+Tf 1 1 1
+
