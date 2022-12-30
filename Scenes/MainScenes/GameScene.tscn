@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/MainScenes/GameUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Textures/Grid-Level2.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Character/FlashLight.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Terrain/Cave.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Enemies/Eye.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 3 )
@@ -21,6 +21,13 @@ data = PoolVector3Array( 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, 
 
 [sub_resource type="ConcavePolygonShape" id=7]
 data = PoolVector3Array( 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25 )
+
+[sub_resource type="Environment" id=8]
+glow_enabled = true
+glow_intensity = 2.18
+glow_strength = 1.48
+glow_blend_mode = 0
+glow_bicubic_upscale = true
 
 [node name="GameScene" type="Spatial"]
 
@@ -55,14 +62,31 @@ skeleton = NodePath("../..")
 [node name="CollisionShape" type="CollisionShape" parent="Map/MeshInstance3/StaticBody"]
 shape = SubResource( 7 )
 
-[node name="Cave" parent="." instance=ExtResource( 5 )]
+[node name="Cave" parent="Map" instance=ExtResource( 5 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
-[node name="Cave2" parent="." instance=ExtResource( 5 )]
+[node name="Cave2" parent="Map" instance=ExtResource( 5 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -137.529 )
 
-[node name="Cave3" parent="." instance=ExtResource( 5 )]
+[node name="Cave3" parent="Map" instance=ExtResource( 5 )]
 transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 0, 0, 120.031 )
 
-[node name="Enemy" parent="." instance=ExtResource( 6 )]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 8 )
+
+[node name="Eyes" type="Spatial" parent="."]
+
+[node name="Eye" parent="Eyes" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.30312, 37.2219 )
+
+[node name="Eye2" parent="Eyes" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.85964, 20.3385 )
+
+[node name="Eye3" parent="Eyes" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.458358, 75.5543 )
+
+[node name="Eye4" parent="Eyes" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.88993, 4.30312, 61.3181 )
+
+[node name="Eye5" parent="Eyes" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0046, 4.30312, 42.7482 )

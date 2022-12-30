@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Meshes/Flashlight.obj" type="ArrayMesh" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
@@ -31,15 +30,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51439, 0 )
 [node name="Camera" type="Camera" parent="Head"]
 environment = SubResource( 3 )
 far = 200.0
-
-[node name="Flashlight Mesh" type="MeshInstance" parent="Head"]
-transform = Transform( -0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, 0.680413, -0.649646, -1.64915 )
-visible = false
-layers = 2
-cast_shadow = 0
-generate_lightmap = false
-mesh = ExtResource( 2 )
-skeleton = NodePath("../..")
 
 [node name="OmniLight" type="OmniLight" parent="."]
 light_color = Color( 1, 0.984314, 0.780392, 1 )
