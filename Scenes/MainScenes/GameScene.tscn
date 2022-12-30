@@ -33,11 +33,6 @@ glow_bicubic_upscale = true
 
 [node name="Control" parent="." instance=ExtResource( 1 )]
 
-[node name="Character" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294685, 3.81913, -0.108849 )
-
-[node name="FlashLight" parent="." instance=ExtResource( 4 )]
-
 [node name="Map" type="Spatial" parent="."]
 
 [node name="MeshInstance2" type="MeshInstance" parent="Map"]
@@ -90,3 +85,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.88993, 4.30312, 61.3181 )
 
 [node name="Eye5" parent="Eyes" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0046, 4.30312, 42.7482 )
+
+[node name="Character Flashlight" type="Spatial" parent="."]
+
+[node name="Character" parent="Character Flashlight" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294685, 3.81913, -0.108849 )
+
+[node name="FlashLight" parent="Character Flashlight" instance=ExtResource( 4 )]
