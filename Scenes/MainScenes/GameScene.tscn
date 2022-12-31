@@ -31,7 +31,7 @@ glow_bicubic_upscale = true
 
 [node name="GameScene" type="Spatial"]
 
-[node name="Control" parent="." instance=ExtResource( 1 )]
+[node name="GameUI" parent="." instance=ExtResource( 1 )]
 
 [node name="Map" type="Spatial" parent="."]
 

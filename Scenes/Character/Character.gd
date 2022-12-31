@@ -1,7 +1,7 @@
 extends KinematicBody
 
 
-export var mouse_sensitivity = 0.03
+onready var mouse_sensitivity = $"/root/SceneManager".Globals["sensitivity"]
 
 export var speed = 15
 
