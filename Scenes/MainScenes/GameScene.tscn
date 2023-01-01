@@ -43,6 +43,8 @@ skin = SubResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="StaticBody" type="StaticBody" parent="Map/MeshInstance2"]
+collision_layer = 2
+collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape" parent="Map/MeshInstance2/StaticBody"]
 shape = SubResource( 6 )
@@ -54,6 +56,8 @@ skin = SubResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="StaticBody" type="StaticBody" parent="Map/MeshInstance3"]
+collision_layer = 2
+collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape" parent="Map/MeshInstance3/StaticBody"]
 shape = SubResource( 7 )
@@ -95,4 +99,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294685, 3.81913, -0.108849
 [node name="FlashLight" parent="Character Flashlight" instance=ExtResource( 4 )]
 
 [node name="Enemy" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56601, 7.72882, -37.491 )
+transform = Transform( -0.987532, 0, 0.157417, 0, 1, 0, -0.157417, 0, -0.987532, 1.2621, 6.53195, -37.491 )

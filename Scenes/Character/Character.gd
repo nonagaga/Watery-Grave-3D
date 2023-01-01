@@ -41,4 +41,4 @@ func _physics_process(delta):
 	movement.x = h_velocity.x
 	movement.y = h_velocity.y
 	
-	move_and_slide(movement, Vector3.UP)
+	movement = move_and_slide(movement, Vector3.UP)
