@@ -1,19 +1,16 @@
 extends KinematicBody
 
 onready var rays = $"Rays"
+onready var target = $"/root/SceneManager/GameScene/Character Flashlight/Character"
 
-export var speed = 5
-
+export var speed = 500
 export var turn_speed = 2
 
 var velocity = Vector3.ZERO
 
-onready var target = $"/root/SceneManager/GameScene/Character Flashlight/Character"
-
 func _physics_process(delta):
 	new_pathfind(delta)
 	turn(delta)
-	#pathfind(delta)
 	move(delta)
 
 func turn(delta):
@@ -21,7 +18,7 @@ func turn(delta):
 	transform.basis = transform.basis.slerp(Basis(rotation), delta * turn_speed).orthonormalized()
 
 func move(delta):
-	velocity = Vector3.BACK * speed
+	velocity = -transform.basis.z * speed * delta
 	velocity = move_and_slide(velocity, Vector3.UP)
 
 func get_weighted_ray(ray_name):

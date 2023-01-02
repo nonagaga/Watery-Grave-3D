@@ -12,6 +12,7 @@ func _ready():
 	
 func on_start_pressed():
 	var gameScene = load("res://Scenes/MainScenes/GameScene.tscn").instance()
+	#var gameScene = load("res://Scenes/MainScenes/TestScene.tscn").instance()
 	get_node("Menu").queue_free()
 	add_child(gameScene)
 	

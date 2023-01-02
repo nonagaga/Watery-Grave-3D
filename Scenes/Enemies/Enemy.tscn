@@ -29,7 +29,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 3 )
 
 [node name="Rays" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5 )
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 0, -5 )
 
 [node name="Down" type="RayCast" parent="Rays"]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -3, 0 )
