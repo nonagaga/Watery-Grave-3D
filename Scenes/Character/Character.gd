@@ -1,5 +1,5 @@
 extends KinematicBody
-
+#what up nerd
 
 onready var mouse_sensitivity = $"/root/SceneManager".Globals["sensitivity"]
 
