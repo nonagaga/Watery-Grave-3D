@@ -92,6 +92,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.88993, 4.30312, 61.3181 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0046, 4.30312, 42.7482 )
 
 [node name="Character Flashlight" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0056, 0 )
 
 [node name="Character" parent="Character Flashlight" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294685, 3.81913, -0.108849 )
@@ -99,4 +100,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294685, 3.81913, -0.108849
 [node name="FlashLight" parent="Character Flashlight" instance=ExtResource( 4 )]
 
 [node name="Enemy" parent="." instance=ExtResource( 7 )]
-transform = Transform( -0.987532, 0, 0.157417, 0, 1, 0, -0.157417, 0, -0.987532, 1.2621, 6.53195, -37.491 )
+transform = Transform( -0.987532, 0, 0.157417, 0, 1, 0, -0.157417, 0, -0.987532, 1.2621, 6.53195, -162.04 )
