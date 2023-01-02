@@ -25,6 +25,7 @@ window/stretch/aspect="keep"
 
 default=false
 layers=false
+concave=false
 
 [gui]
 
@@ -76,6 +77,7 @@ swim_down={
 
 [physics]
 
+3d/smooth_trimesh_collision=true
 common/enable_pause_aware_picking=true
 
 [rendering]
