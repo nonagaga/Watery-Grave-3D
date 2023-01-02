@@ -26,19 +26,20 @@ func _input(event):
 
 func _physics_process(delta):
 	
+	#direction is the force applied every frame based on player inputs
 	direction = Vector3()
 	
 	direction += head.global_transform.basis.z * ((-Input.get_action_strength("move_forward")) + Input.get_action_strength("move_backward"))
 	direction += head.global_transform.basis.x * (-Input.get_action_strength("move_left")) + head.global_transform.basis.x * Input.get_action_strength("move_right")
 	
-	direction.y += (Input.get_action_strength("swim_up") - Input.get_action_strength("swim_down"))/swim_up_divider #I believed that all possible adjustable values should not be magic numbers
+	direction += Vector3.UP * (Input.get_action_strength("swim_up") - Input.get_action_strength("swim_down")) #I believed that all possible adjustable values should not be magic numbers
 	
+	#normalization changes vector length to 1 to prevent unnatural speed
 	direction = direction.normalized()
 	
 	h_velocity += direction * speed * delta
 	h_velocity = h_velocity.linear_interpolate(Vector3.ZERO, h_acceleration*delta)
-	movement.z = h_velocity.z
-	movement.x = h_velocity.x
-	movement.y = h_velocity.y
 	
-	movement = move_and_slide(movement, Vector3.UP)
+	#move_and_slide is a built in method that applies a linear velocity and checks for collisions
+	#ie if this method isn't used, no collisions!
+	h_velocity = move_and_slide(h_velocity, Vector3.UP)
