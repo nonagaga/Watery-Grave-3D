@@ -27,6 +27,7 @@ data = PoolVector3Array( 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, 
 glow_enabled = true
 glow_intensity = 2.18
 glow_strength = 1.48
+glow_bloom = 0.5
 glow_blend_mode = 0
 glow_bicubic_upscale = true
 
