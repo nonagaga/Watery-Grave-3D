@@ -24,8 +24,11 @@ func _physics_process(delta):
 	move(delta)
 
 func turn(delta):
-	var rotation = transform.looking_at(target.global_translation, Vector3.UP).basis.get_rotation_quat().normalized()
-	transform.basis = transform.basis.slerp(rotation.normalized(), delta * turn_speed).get_rotation_quat()
+	var rotation_transform = transform.looking_at(target.global_translation, Vector3.UP)
+	var rotation_quat = rotation_transform.basis.get_rotation_quat()
+	var curr_rotation_quat = Quat(transform.basis)
+	var interpolated_quat = curr_rotation_quat.slerp(rotation_quat, turn_speed * delta)
+	transform.basis = Basis(interpolated_quat)
 
 func move(delta):
 	velocity = -transform.basis.z * speed * delta
