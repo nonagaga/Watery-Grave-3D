@@ -6,8 +6,9 @@ onready var target = $"/root/SceneManager/GameScene/Character Flashlight/Charact
 export var speed = 500
 export var turn_speed = 2
 
-export var detection_distance = 20
+export var detection_distance = 100
 export var correction_strength = 1
+export var fov = 45
 
 enum {WANDERING_STATE,ATTACK_STATE}
 
@@ -18,7 +19,9 @@ var velocity = Vector3.ZERO
 func _physics_process(delta):
 	new_pathfind(delta)
 	if(target.translation.distance_to(translation) <= detection_distance):
-		state = ATTACK_STATE
+		detect_player()
+	else:
+		state = WANDERING_STATE
 	if state == ATTACK_STATE:
 		turn(delta)
 	move(delta)
@@ -26,7 +29,7 @@ func _physics_process(delta):
 func turn(delta):
 	var rotation_transform = transform.looking_at(target.global_translation, Vector3.UP)
 	var rotation_quat = rotation_transform.basis.get_rotation_quat()
-	var curr_rotation_quat = Quat(transform.basis)
+	var curr_rotation_quat = transform.basis.get_rotation_quat()
 	var interpolated_quat = curr_rotation_quat.slerp(rotation_quat, turn_speed * delta)
 	transform.basis = Basis(interpolated_quat)
 
@@ -56,3 +59,12 @@ func get_ray_distance(ray_name):
 
 func _enemy_in_light():
 	state = ATTACK_STATE
+
+func detect_player():
+	var direction_vector = global_translation.direction_to(target.global_translation)
+	print(String(direction_vector.dot(transform.basis.z.normalized() * -1)) + " " + String(acos(deg2rad(fov))))
+	if direction_vector.dot(transform.basis.z.normalized() * -1) > acos(deg2rad(fov)):
+		state = ATTACK_STATE
+	else:
+		state = WANDERING_STATE
+	
