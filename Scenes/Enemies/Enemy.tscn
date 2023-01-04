@@ -75,3 +75,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.39352 )
 light_color = Color( 1, 0, 0, 1 )
 light_indirect_energy = 1.098
 omni_range = 10.0
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 5.0

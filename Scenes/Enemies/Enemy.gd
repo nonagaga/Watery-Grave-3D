@@ -1,13 +1,14 @@
 extends KinematicBody
 
-onready var rays = $"Rays"
+onready var rays = $Rays
 onready var target = $"/root/SceneManager/GameScene/Character Flashlight/Character"
+onready var chase_timer = $ChaseTimer
 
 export var speed = 500
 export var turn_speed = 2
 
-export var detection_distance = 100
-export var correction_strength = 1
+export var detection_distance = 20
+export var correction_strength = 0.5
 export var fov = 45
 
 enum {WANDERING_STATE,ATTACK_STATE}
@@ -17,14 +18,15 @@ var state = WANDERING_STATE
 var velocity = Vector3.ZERO
 
 func _physics_process(delta):
-	new_pathfind(delta)
 	if(target.translation.distance_to(translation) <= detection_distance):
 		detect_player()
 	else:
-		state = WANDERING_STATE
+		if (chase_timer.is_stopped()):
+			state = WANDERING_STATE
 	if state == ATTACK_STATE:
 		turn(delta)
 	move(delta)
+	new_pathfind(delta)
 
 func turn(delta):
 	var rotation_transform = transform.looking_at(target.global_translation, Vector3.UP)
@@ -33,9 +35,18 @@ func turn(delta):
 	var interpolated_quat = curr_rotation_quat.slerp(rotation_quat, turn_speed * delta)
 	transform.basis = Basis(interpolated_quat)
 
+func are_all_rays_colliding():
+	var colliding = true
+	for ray in rays.get_children():
+		if !ray.is_colliding():
+			colliding = false
+	return colliding
+
 func move(delta):
-	velocity = -transform.basis.z * speed * delta
-	velocity = move_and_slide(velocity, Vector3.UP)
+	if !are_all_rays_colliding():
+		velocity += -transform.basis.z * speed * delta
+		velocity = velocity.normalized() * speed * delta
+		velocity = move_and_slide(velocity, Vector3.UP)
 
 func get_weighted_ray(ray_name):
 	var ray = rays.get_node(ray_name)
@@ -45,8 +56,8 @@ func get_weighted_ray(ray_name):
 	return 1 - ray_percentage
 
 func new_pathfind(delta):
-	rotate_y(deg2rad(get_weighted_ray("Right") - get_weighted_ray("Left")))
-	rotate_x(deg2rad(get_weighted_ray("Up") - get_weighted_ray("Down")))
+	rotate_y(correction_strength * deg2rad(get_weighted_ray("Right") - get_weighted_ray("Left")))
+	rotate_x(correction_strength * deg2rad(get_weighted_ray("Up") - get_weighted_ray("Down")))
 
 func get_ray_distance(ray_name):
 	var ray = rays.get_node(ray_name)
@@ -58,13 +69,12 @@ func get_ray_distance(ray_name):
 	return abs(ray.cast_to.y)
 
 func _enemy_in_light():
+	chase_timer.start()
 	state = ATTACK_STATE
 
 func detect_player():
 	var direction_vector = global_translation.direction_to(target.global_translation)
-	print(String(direction_vector.dot(transform.basis.z.normalized() * -1)) + " " + String(acos(deg2rad(fov))))
 	if direction_vector.dot(transform.basis.z.normalized() * -1) > acos(deg2rad(fov)):
 		state = ATTACK_STATE
-	else:
-		state = WANDERING_STATE
+		chase_timer.start()
 	
