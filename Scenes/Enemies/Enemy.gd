@@ -6,16 +6,26 @@ onready var target = $"/root/SceneManager/GameScene/Character Flashlight/Charact
 export var speed = 500
 export var turn_speed = 2
 
+export var detection_distance = 20
+export var correction_strength = 1
+
+enum {WANDERING_STATE,ATTACK_STATE}
+
+var state = WANDERING_STATE
+
 var velocity = Vector3.ZERO
 
 func _physics_process(delta):
 	new_pathfind(delta)
-	turn(delta)
+	if(target.translation.distance_to(translation) <= detection_distance):
+		state = ATTACK_STATE
+	if state == ATTACK_STATE:
+		turn(delta)
 	move(delta)
 
 func turn(delta):
-	var rotation = transform.looking_at(target.global_translation, Vector3.UP).basis.get_rotation_quat()
-	transform.basis = transform.basis.slerp(Basis(rotation), delta * turn_speed).orthonormalized()
+	var rotation = transform.looking_at(target.global_translation, Vector3.UP).basis.get_rotation_quat().normalized()
+	transform.basis = transform.basis.slerp(rotation.normalized(), delta * turn_speed).get_rotation_quat()
 
 func move(delta):
 	velocity = -transform.basis.z * speed * delta
@@ -40,3 +50,6 @@ func get_ray_distance(ray_name):
 		var distance = origin.distance_to(collision_point)
 		return distance
 	return abs(ray.cast_to.y)
+
+func _enemy_in_light():
+	state = ATTACK_STATE
